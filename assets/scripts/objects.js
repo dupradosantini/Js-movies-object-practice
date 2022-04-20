@@ -23,7 +23,7 @@ function renderMovies(filter = ''){
         const { info, ...otherProps } = movie;  //this pulls out every value for the key ''info'' in movie, and puts in this ''info'' const.
         //allowing us to swap movie.info.something everywhere to just, info.something. otherProps collect all the other fields.
         //if we coded info: movieInfo then this information can only be retrieved by the custom name movieInfo
-        let text = info.title + ' - ';
+        let text = movie.getFormattedTitle() + ' - ';
         for (const key in info){
             if(key !== 'title'){ //if key is not title, we know this is the property the user entered.
                 text = text + `${key}: ${info[key]}`; //creating a string with the key, and the value associated with it (using [] notation.)
@@ -48,7 +48,10 @@ const addMovieHandler = () => {
             title, //if key and value names are equal (derived dinamycally) from a variable of same name
             [extraName]: extraValue
         },
-        id: Math.random() //quick solution to id generate. (not reliable)
+        id: Math.random(), //quick solution to id generate. (not reliable)
+        getFormattedTitle: function() {
+            return this.info.title.toUpperCase();
+        }
     };
 
     movies.push(newMovie);
