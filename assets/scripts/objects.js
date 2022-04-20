@@ -17,7 +17,13 @@ function renderMovies(){
 
     movies.forEach( (movie) => {
         const movieEl = document.createElement('li');
-        movieEl.textContent = movie.info.title;
+        let text = movie.info.title + ' - ';
+        for (const key in movie.info){
+            if(key !== 'title'){ //if key is not title, we know this is the property the user entered.
+                text = text + `${key}: ${movie.info[key]}`; //creating a string with the key, and the value associated with it (using [] notation.)
+            }
+        }
+        movieEl.textContent = text;
         movieList.append(movieEl);
     });
 }
